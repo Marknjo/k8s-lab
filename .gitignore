@@ -1,0 +1,20 @@
+# Ignore node_modules folders and its content in any nested directory
+node_modules
+**/node_modules
+
+# Ignore build folders and its content in any nested directory
+/build
+**/build/
+
+# Ignore cache folders and its content in any nested directory
+/.cache
+**/.cache
+
+# Ignore vscode cache folders and its content in any nested directory
+.vscode
+**/.vscode
+
+# Ignore .env files in any nested directory
+.env
+*.env
+**/*.env
