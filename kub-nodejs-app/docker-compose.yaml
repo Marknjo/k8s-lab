@@ -1,8 +1,8 @@
 services:
-  kub-test:
+  kub-lab:
     build: 
       context: .
-      
+
     container_name: k8s-lab
     
     ports:
