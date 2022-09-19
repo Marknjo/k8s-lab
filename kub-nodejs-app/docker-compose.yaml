@@ -1,0 +1,9 @@
+services:
+  kub-test:
+    build: 
+      context: .
+      
+    container_name: k8s-lab
+    
+    ports:
+      - "80:8080"
