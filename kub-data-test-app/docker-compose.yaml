@@ -8,6 +8,7 @@ services:
     volumes:
       - ./:/app
       - stories:/app/story
+      - /app/node_modules
 
 volumes:
   stories:
