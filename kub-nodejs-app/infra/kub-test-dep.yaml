@@ -15,6 +15,12 @@ spec:
       - name: k8s-app
         image: marknjo/kub-test-app:latest
         imagePullPolicy: Always
+        livenessProbe:
+          HTTPGet:
+            path: /
+            port: 8080
+          periodicSeconds: 10
+          initialDelaySeconds: 5
         resources:
           limits:
             memory: "128Mi"
