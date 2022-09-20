@@ -2,12 +2,20 @@ import path from "path";
 import fs from "fs";
 
 import express from "express";
+import { fileURLToPath } from "url";
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const filePath = path.join(__dirname, "story", "text.txt");
 
 app.use(express.json({ limit: "10k" }));
+
+app.get("/", (req, res) => {
+  res.send("<h1>App running</h1>");
+});
 
 app.get("/story", (req, res) => {
   fs.readFile(filePath, (err, data) => {
@@ -31,4 +39,6 @@ app.post("/story", (req, res) => {
   });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log(`Server listening in port 3000, http://localhost/`);
+});
