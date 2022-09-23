@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: k-s-lab
+
+# Single image build
+build:
+  local:
+    push: false
+    concurrency: 1
+    tryImportMissing: false
+    useDockerCLI: false
+
+  artifacts:
+  - image: marknjo/kub-test-app
+    context: kub-nodejs-app
+    docker:
+      dockerfile: Dockerfile
+
+# K8s definition
+deploy:
+  kubectl:
+    manifests:
+    - kub-nodejs-app/infra/admin-test-rbac-user.yaml
+    - kub-nodejs-app/infra/dashboard-admin-test-user.yaml
+    - kub-nodejs-app/infra/kub-test-dep.yaml

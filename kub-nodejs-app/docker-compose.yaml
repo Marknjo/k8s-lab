@@ -2,8 +2,11 @@ services:
   kub-lab:
     build: 
       context: .
-
     container_name: k8s-lab
     
     ports:
       - "80:8080"
+
+    volumes:
+      - ./:/app
+      - /app/node_modules
