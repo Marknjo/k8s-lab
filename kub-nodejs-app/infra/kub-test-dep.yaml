@@ -1,18 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-app
+  name: k8s-app-dpy
+
 spec:
   selector:
     matchLabels:
-      app: k8s-app
+      app: test-app
   template:
     metadata:
       labels:
-        app: k8s-app
+        app: test-app
     spec:
       containers:
-      - name: k8s-app
+      - name: test-app
         image: marknjo/kub-test-app:latest
         # imagePullPolicy: Always
         resources:
@@ -26,12 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: k8s-app
+  name: k8s-app-srv
 spec:
   selector:
-    app: k8s-app
-  type: LoadBalancer
+    app: test-app
+  type: ClusterIP
   ports:
-  - port: 80
+  - port: 8080
     targetPort: 8080
-

@@ -9,7 +9,7 @@ app.use(morgan("combined"));
 app.get("/", (req, res) => {
   // app.get("/", (req: Request, res: Response) => {
   res.send(`
-    <h1>Hello from this NodeJS app(update)!!</h1>
+    <h1>Hello from this NodeJS app!</h1>
     <p>Try sending a request to /error and see what happens</p>
     <p>This lines is the first update of this test container</p>
   `);
