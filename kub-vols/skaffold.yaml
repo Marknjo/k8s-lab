@@ -1,0 +1,22 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - "./infra/k8s"
+build:
+  local:
+    push: false
+    concurrency: 1
+    tryImportMissing: false
+    useDockerCLI: false
+
+  artifacts:
+    - image: marknjo/kub-test-story-api
+      context: stories-api
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: *.js
+            src: .
