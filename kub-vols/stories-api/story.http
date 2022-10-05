@@ -1,0 +1,19 @@
+## Story API Rest HTTP Requests
+@hostname = http://localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+### GET home page
+GET {{host}} HTTP/1.1
+
+### GET Storis
+GET {{host}}/story HTTP/1.1
+
+### Create  New Story
+POST {{host}}/story HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "text": "Sample Story"
+}
