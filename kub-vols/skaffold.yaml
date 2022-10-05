@@ -3,7 +3,7 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - "./infra/k8s"
+      - stories-api/infra/k8s/
 build:
   local:
     push: false
@@ -18,5 +18,5 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - dest: *.js
+          - dest: '*.js'
             src: .
