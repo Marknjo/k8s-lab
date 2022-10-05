@@ -16,24 +16,38 @@ spec:
         api: story
     spec:
       containers:
-        - name: marknjo/kub-test-story-api
-          ports:
-            - containerPort: 3000
-          volumeMounts:
-            - mountPath: /app/stories
-              name: story-api-data
+      - name: stories-api
+        image: marknjo/kub-test-story-api
+        volumeMounts:
+        - mountPath: /app/stories
+          name: story-api-data
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "1G"
+        ports:
+        - containerPort: 3000
 
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "1G"
+      ## VOLUMES DEFINITION
+      volumes:
+      - name: story-api-data
+        emptyDir: {}
 
-  ## VOLUMES DEFINITION
-  volumes: 
-    - name: story-api-data
-      emptyDir: {}
-    
+## STORY SERVICE 
+---
 
+apiVersion: v1
+kind: Service
+metadata:
+  name: stories-api-srv
+spec:
+  selector:
+    api: story
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
 
 
 

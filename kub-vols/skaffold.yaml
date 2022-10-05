@@ -3,7 +3,7 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - stories-api/infra/k8s/
+      - stories-api/infra/k8s/*
 build:
   local:
     push: false
