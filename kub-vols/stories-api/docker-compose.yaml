@@ -1,0 +1,14 @@
+services:
+  story:
+    build: .
+    container_name: stories-cnt
+    volumes:
+      - stories:/app/story
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - HOST_URL=http://localhost:3000
+    ports:
+      - "3000:3000"
+volumes:
+  stories: 
