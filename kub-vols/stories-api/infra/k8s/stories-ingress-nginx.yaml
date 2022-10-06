@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: stories-ingress-nginx
   annotations: 
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/enable-regex: 'true'
 spec:
   rules: 
   - host: "stories.io"

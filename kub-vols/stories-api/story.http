@@ -1,7 +1,8 @@
 ## Story API Rest HTTP Requests
-@hostname = http://localhost
+@hostname = http://stories.io
 @port = 3000
-@host = {{hostname}}:{{port}}
+# @host = {{hostname}}:{{port}}
+@host = {{hostname}}
 @contentType = application/json
 
 ### GET home page
