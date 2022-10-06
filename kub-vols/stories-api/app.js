@@ -71,6 +71,12 @@ app.post("/story", (req, res) => {
   });
 });
 
+app.get("/error", () => {
+  console.log("Crushing app!");
+
+  process.exit(1);
+});
+
 const hostUrl = process.env.HOST_URL || "http://localhost:3000";
 app.listen(3000, () => {
   console.log(`App running on ${hostUrl}`);
