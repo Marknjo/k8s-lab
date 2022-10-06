@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stories-pv
+spec: 
+  volumeMode: Filesystem
+  capacity:
+    storage: "1G"
+  accessModes:
+    - "ReadOrWriteOnce"
+  hostPath:
+    path: /data
+    type: DirectoryOrCreate
