@@ -27,6 +27,17 @@ spec:
             memory: "1G"
         ports:
         - containerPort: 3000
+        env:
+          - name: HOST_URL
+            valueFrom: 
+              configMapKeyRef:
+                name: stories-conf
+                key: httpUrl
+          - name: STORY_FOLDER
+            valueFrom:
+              configMapKeyRef:
+                name: stories-conf
+                key: dataFolder
 
       ## VOLUMES DEFINITION
       volumes:

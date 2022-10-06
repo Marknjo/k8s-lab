@@ -7,7 +7,9 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const filePath = path.join(__dirname, "stories", "text.txt");
+const storyFolder = process.env.STORY_FOLDER || "stories";
+
+const filePath = path.join(__dirname, storyFolder, "text.txt");
 
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stories-conf
+data:
+  httpUrl: "http://stories.io"
+  dataFolder: "stories"
