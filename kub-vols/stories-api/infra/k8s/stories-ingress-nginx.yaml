@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stories-ingress-nginx
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules: 
+  - host: "stories.io"
+    http: 
+      paths: 
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service: 
+            name: stories-api-srv
+            port: 
+              number: 3000
+  ingressClassName: nginx
+
+
