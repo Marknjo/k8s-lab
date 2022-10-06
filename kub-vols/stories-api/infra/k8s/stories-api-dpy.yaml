@@ -4,7 +4,7 @@ metadata:
   name: stories-api-dpy
 
 spec: 
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       api: story
@@ -43,9 +43,11 @@ spec:
       volumes:
       - name: story-api-data
         # emptyDir: {}
-        hostPath:
-          path: /data
-          type: DirectoryOrCreate
+        # hostPath:
+        #   path: /data
+        #   type: DirectoryOrCreate
+        persistentVolumeClaim:
+          claimName: stories-pvc
 
 ## STORY SERVICE 
 ---
