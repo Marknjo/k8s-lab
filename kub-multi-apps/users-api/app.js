@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Tasks API");
+  res.send("Users API");
 });
 
 app.post("/signup", async (req, res) => {
