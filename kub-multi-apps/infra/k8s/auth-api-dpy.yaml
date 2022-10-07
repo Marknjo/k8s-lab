@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api-dpy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      api: auth
+  template:
+    metadata:
+      labels:
+        api: auth
+    spec:
+      containers:
+        - name: auth-api-pd
+          image: marknjo/kub-test-auth-api
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: HOST
+              value: "auth-api-srv"
+            - name: PORT
+              value: "8000"
+            - name: PROTOCOL
+              value: "http"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1.5Gi"
+
+
