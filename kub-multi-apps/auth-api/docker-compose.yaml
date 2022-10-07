@@ -1,0 +1,14 @@
+services:
+  auth-api:
+    build: 
+      context: .
+    container_name: auth-api-cnt
+    ports:
+      - 8000:8000
+    environment:
+      PORT: 8000
+      HOST: localhost
+      PROTOCOL: http
+    volumes:
+      - ./:/app
+      - /app/node_modules

@@ -65,4 +65,11 @@ app.post("/login", async (req, res) => {
   return res.status(response.status).json({ message: "Logging in failed!" });
 });
 
-app.listen(8080);
+const port = process.env.PORT || 8002;
+const host = process.env.HOST || "localhost";
+const protocol = process.env.PROTOCOL || "http";
+
+app.listen(port, () => {
+  const hostUrl = `${protocol}://${host}:${port}`;
+  console.log(`Users server running on ${hostUrl}`);
+});

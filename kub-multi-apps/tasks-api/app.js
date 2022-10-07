@@ -72,8 +72,9 @@ app.post("/tasks", async (req, res) => {
 
 const port = process.env.PORT || 8001;
 const host = process.env.HOST || "localhost";
+const protocol = process.env.PROTOCOL || "http";
 
 app.listen(port, () => {
-  const hostUrl = process.env.HOST_URL || `http://${host}:${port}`;
-  console.log(`Server running on ${hostUrl}`);
+  const hostUrl = `${protocol}://${host}:${port}`;
+  console.log(`Tasks server running on ${hostUrl}`);
 });
