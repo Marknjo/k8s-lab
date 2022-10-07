@@ -1,0 +1,15 @@
+services:
+  tasks:
+    build: 
+      context: .
+    container_name: tasks-cnt
+    ports:
+      - 8001:8001
+    environment:
+      - HOST=localhost
+      - PORT=8001
+      - PROTOCOL=http
+      - TASKS_FOLDER=tasks
+    volumes:
+      - ./:/app
+      - /app/node_modules
