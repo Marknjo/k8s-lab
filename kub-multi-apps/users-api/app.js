@@ -70,6 +70,10 @@ const host = process.env.HOST || "localhost";
 const protocol = process.env.PROTOCOL || "http";
 
 app.listen(port, () => {
-  const hostUrl = `${protocol}://${host}:${port}`;
+  const requiresPort = process.env.REQUIRE_PORT || "true";
+
+  const hostUrl = Boolean(requiresPort)
+    ? `${protocol}://${host}:${port}`
+    : `${protocol}://${host}`;
   console.log(`Users server running on ${hostUrl}`);
 });

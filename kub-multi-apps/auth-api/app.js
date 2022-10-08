@@ -37,11 +37,15 @@ app.get("/hashed-password/:password", (req, res) => {
   res.status(200).json({ hashedPassword: hashedPassword });
 });
 
-const port = +process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
 const host = process.env.HOST || "localhost";
 const protocol = process.env.PROTOCOL || "http";
 
 app.listen(port, () => {
-  const hostUrl = `${protocol}://${host}:${port}`;
+  const requiresPort = process.env.REQUIRE_PORT || "true";
+
+  const hostUrl = Boolean(requiresPort)
+    ? `${protocol}://${host}:${port}`
+    : `${protocol}://${host}`;
   console.log(`Auth server running on ${hostUrl}`);
 });

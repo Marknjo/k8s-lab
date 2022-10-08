@@ -25,6 +25,8 @@ spec:
               value: "8000"
             - name: PROTOCOL
               value: "http"
+            - name: REQUIRE_PORT
+              value: "true"
           resources:
             limits:
               cpu: "500m"
