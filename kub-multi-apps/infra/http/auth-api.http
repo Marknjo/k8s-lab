@@ -1,6 +1,6 @@
 ## AUTH API HTTP REQUEST 
-@host_name = auth-api-srv
-@port = 8000
+@host_name = 10.99.232.122
+@port = 32002
 @protocol = http
 @host = {{protocol}}://{{host_name}}:{{port}}
 @contentType = "application/json;charset=utf8"

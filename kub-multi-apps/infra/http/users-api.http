@@ -1,6 +1,6 @@
 ## AUTH API HTTP REQUEST 
 @host_name = users-api-srv
-@port = 8000
+@port = 32413
 @protocol = http
 @host = {{protocol}}://{{host_name}}:{{port}}
 @contentType = "application/json;charset=utf8"
@@ -9,8 +9,6 @@
 
 ### Test API Is working
 GET {{host}} HTTP/1.1
-Authorization: Bearer {{token}}
-
 
 
 ### Fake Login Users

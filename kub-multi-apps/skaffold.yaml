@@ -1,0 +1,41 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - "infra/k8s/*"
+build: 
+  local:
+    push: false
+    concurrency: 1
+    tryImportMissing: false
+    useDockerCLI: false
+    
+  artifacts:
+    - image: marknjo/kub-test-auth-api
+      context: auth-api
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+
+    - image: marknjo/kub-test-tasks-api
+      context: tasks-api
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+  
+    - image: marknjo/kub-test-users-api
+      context: users-api
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "*.js"
+  
