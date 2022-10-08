@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api-dpy
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      api: users
+  template:
+    metadata:
+      name: users-api-pod
+      labels:
+        api: users
+    spec:
+      containers:
+        - name: users-api-cnt
+          image: marknjo/kub-test-users-api
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8002
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1.5Gi"
+          env:
+            - name: HOST
+              valueFrom: 
+                configMapKeyRef:
+                  key: host
+                  name: users-api-envs
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: port
+                  name: users-api-envs
+            - name: PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  key: protocol
+                  name: users-api-envs
+            - name: REQUIRE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: require-port
+                  name: users-api-envs
