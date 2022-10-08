@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-api-dpy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      api: tasks
+  template:
+    metadata:
+      name: tasks-pod
+      labels:
+        api: tasks
+    spec:
+      containers:
+        - name: tasks-api-cnt
+          image: marknjo/kub-test-tasks-api
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1.5Gi"
+          volumeMounts:
+            - mountPath: /apps/tasks
+              name: tasks-data-vol
+          imagePullPolicy: Never
+          env:
+            - name: HOST
+              value: tasks-api-srv
+            - name: PORT
+              value: "8001"
+            - name: PROTOCOL
+              value: "http"
+            - name: REQUIRE_PORT
+              value: "true"
+          ports:
+            - containerPort: 8001
+
+      volumes:
+        - name: tasks-data-vol
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
