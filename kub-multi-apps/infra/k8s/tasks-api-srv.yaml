@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     api: tasks
-  type: NodePort
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8001

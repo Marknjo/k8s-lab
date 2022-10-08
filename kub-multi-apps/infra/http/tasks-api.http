@@ -1,8 +1,9 @@
 ## AUTH API HTTP REQUEST 
-@host_name = tasks-api-srv
-@port = 8000
+@host_name = multi-apps.io
+@port = 8001
 @protocol = http
-@host = {{protocol}}://{{host_name}}:{{port}}/tasks
+# @host = {{protocol}}://{{host_name}}:{{port}}
+@host = {{protocol}}://{{host_name}}/tasks
 @contentType = "application/json;charset=utf8"
 
 @token = "abc"

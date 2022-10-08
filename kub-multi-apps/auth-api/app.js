@@ -4,11 +4,13 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/auth", (req, res) => {
+  console.log("auth");
+
   res.send("Auth API");
 });
 
-app.get("/verify-token/:token", (req, res) => {
+app.get("/auth/verify-token/:token", (req, res) => {
   const token = req.params.token;
 
   // dummy verification!
@@ -18,7 +20,7 @@ app.get("/verify-token/:token", (req, res) => {
   res.status(401).json({ message: "Token invalid." });
 });
 
-app.get("/token/:hashedPassword/:enteredPassword", (req, res) => {
+app.get("/auth/token/:hashedPassword/:enteredPassword", (req, res) => {
   const hashedPassword = req.params.hashedPassword;
   const enteredPassword = req.params.enteredPassword;
 
@@ -30,7 +32,7 @@ app.get("/token/:hashedPassword/:enteredPassword", (req, res) => {
   res.status(401).json({ message: "Passwords do not match." });
 });
 
-app.get("/hashed-password/:password", (req, res) => {
+app.get("/auth/hashed-password/:password", (req, res) => {
   // dummy hashed pw generation!
   const enteredPassword = req.params.password;
   const hashedPassword = enteredPassword + "_hash";
@@ -44,8 +46,9 @@ const protocol = process.env.PROTOCOL || "http";
 app.listen(port, () => {
   const requiresPort = process.env.REQUIRE_PORT || "true";
 
-  const hostUrl = Boolean(requiresPort)
-    ? `${protocol}://${host}:${port}`
-    : `${protocol}://${host}`;
+  const hostUrl =
+    requiresPort === "true"
+      ? `${protocol}://${host}:${port}`
+      : `${protocol}://${host}/auth`;
   console.log(`Auth server running on ${hostUrl}`);
 });

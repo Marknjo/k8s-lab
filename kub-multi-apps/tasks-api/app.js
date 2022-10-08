@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/health-check", (req, res) => {
+app.get("/tasks/health-check", (req, res) => {
   res.send("Tasks API");
 });
 
@@ -28,7 +28,7 @@ const extractAndVerifyToken = async (headers) => {
   return response.data.uid;
 };
 
-app.get("/", async (req, res) => {
+app.get("/tasks", async (req, res) => {
   try {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
     fs.readFile(filePath, (err, data) => {
@@ -51,7 +51,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/create/task", async (req, res) => {
+app.post("/tasks/create/task", async (req, res) => {
   try {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
     const text = req.body.text;
@@ -77,8 +77,9 @@ const protocol = process.env.PROTOCOL || "http";
 app.listen(port, () => {
   const requiresPort = process.env.REQUIRE_PORT || "true";
 
-  const hostUrl = Boolean(requiresPort)
-    ? `${protocol}://${host}:${port}`
-    : `${protocol}://${host}`;
+  const hostUrl =
+    requiresPort === "true"
+      ? `${protocol}://${host}:${port}`
+      : `${protocol}://${host}/tasks`;
   console.log(`Tasks server running on ${hostUrl}`);
 });

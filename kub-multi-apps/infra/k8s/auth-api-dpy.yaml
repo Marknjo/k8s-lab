@@ -20,13 +20,13 @@ spec:
             - containerPort: 8000
           env:
             - name: HOST
-              value: "auth-api-srv"
+              value: "multi-apps.io"
             - name: PORT
               value: "8000"
             - name: PROTOCOL
               value: "http"
             - name: REQUIRE_PORT
-              value: "true"
+              value: "false"
           resources:
             limits:
               cpu: "500m"

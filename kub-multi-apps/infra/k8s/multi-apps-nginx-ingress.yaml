@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multi-apps-nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-regex: 'true'
+spec:
+  ingressClassName: nginx
+  rules: 
+    - host: multi-apps.io
+      http:
+        paths:
+          - path: /auth
+            pathType: Prefix
+            backend: 
+              service: 
+                name: auth-api-srv
+                port:
+                  number: 8000 
+          - path: /tasks
+            pathType: Prefix
+            backend: 
+              service: 
+                name: tasks-api-srv
+                port:
+                  number: 8001
+          - path: /users
+            pathType: Prefix
+            backend: 
+              service: 
+                name: users-api-srv
+                port:
+                  number: 8002
+  
+
+

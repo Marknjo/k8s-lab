@@ -5,11 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/users/", (req, res) => {
   res.send("Users API");
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/users/signup", async (req, res) => {
   // It's just a dummy service - we don't really care for the email
   const email = req.body.email;
   const password = req.body.password;
@@ -38,7 +38,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/users/login", async (req, res) => {
   // It's just a dummy service - we don't really care for the email
   const email = req.body.email;
   const password = req.body.password;
@@ -72,8 +72,11 @@ const protocol = process.env.PROTOCOL || "http";
 app.listen(port, () => {
   const requiresPort = process.env.REQUIRE_PORT || "true";
 
-  const hostUrl = Boolean(requiresPort)
-    ? `${protocol}://${host}:${port}`
-    : `${protocol}://${host}`;
+  console.log({ port, host });
+
+  const hostUrl =
+    requiresPort === "true"
+      ? `${protocol}://${host}:${port}`
+      : `${protocol}://${host}/users`;
   console.log(`Users server running on ${hostUrl}`);
 });

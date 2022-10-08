@@ -1,8 +1,9 @@
 ## AUTH API HTTP REQUEST 
-@host_name = users-api-srv
-@port = 32413
+@host_name = multi-apps.io
+@port = 8002
 @protocol = http
-@host = {{protocol}}://{{host_name}}:{{port}}
+# @host = {{protocol}}://{{host_name}}:{{port}}
+@host = {{protocol}}://{{host_name}}/users
 @contentType = "application/json;charset=utf8"
 
 @token = "abc"
