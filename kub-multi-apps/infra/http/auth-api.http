@@ -1,0 +1,18 @@
+## AUTH API HTTP REQUEST 
+@host_name = auth-api-srv
+@port = 8000
+@protocol = http
+@host = {{protocol}}://{{host_name}}:{{port}}
+@contentType = "application/json;charset=utf8"
+
+### Get Default Test Path
+GET {{host}} HTTP/1.1
+
+### Verify Password Token
+GET {{host}}/abc HTTP/1.1
+
+### Test Passwork Hashing
+GET {{host}}/token/sected-app_hash/secret-pass HTTP/1.1
+
+### Fake check hashed password
+GET {{host}}//hashed-password/secret-pass HTTP/1.1
