@@ -1,0 +1,27 @@
+## AUTH API HTTP REQUEST 
+@host_name = tasks-api-srv
+@port = 8000
+@protocol = http
+@host = {{protocol}}://{{host_name}}:{{port}}/tasks
+@contentType = "application/json;charset=utf8"
+
+@token = "abc"
+
+### Get all tasks
+GET {{host}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+
+### Verify Password Token
+GET {{host}}/health-check HTTP/1.1
+
+### Test Passwork Hashing
+POST {{host}}/create/task HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Learn Kubernetes",
+  "text": "Start reviewing section 1 to section 3 by 11:00AM"
+}

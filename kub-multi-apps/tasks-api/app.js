@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/health-check", (req, res) => {
   res.send("Tasks API");
 });
 
@@ -28,7 +28,7 @@ const extractAndVerifyToken = async (headers) => {
   return response.data.uid;
 };
 
-app.get("/tasks", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
     fs.readFile(filePath, (err, data) => {
@@ -51,7 +51,7 @@ app.get("/tasks", async (req, res) => {
   }
 });
 
-app.post("/tasks", async (req, res) => {
+app.post("/create/task", async (req, res) => {
   try {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
     const text = req.body.text;
