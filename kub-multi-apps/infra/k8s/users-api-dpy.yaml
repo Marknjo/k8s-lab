@@ -44,3 +44,13 @@ spec:
                 configMapKeyRef:
                   key: require-port
                   name: users-api-envs
+            - name: AUTH_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: authAddr
+                  name: users-api-envs
+            - name: AUTH_SRV_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: authSrvPort
+                  name: users-api-envs 

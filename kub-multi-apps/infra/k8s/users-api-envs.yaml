@@ -7,4 +7,6 @@ data:
   port: "8002"
   protocol: "http"
   require-port: "false"
+  authAddr: auth-api-srv
+  authSrvPort: "8000"
 

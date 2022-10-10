@@ -1,11 +1,17 @@
-import express from "express";
+import express, { json } from "express";
 import axios from "axios";
 
 const app = express();
 
+/// App Start
 const port = process.env.PORT || 8002;
 const host = process.env.HOST || "localhost";
 const protocol = process.env.PROTOCOL || "http";
+
+/// AUTH
+const authSrvAddr = process.env.AUTH_ADDRESS || "auth";
+const authSrvPort = process.env.AUTH_SRV_PORT || 8000;
+const authHostUrl = `http://${authSrvAddr}:${authSrvPort}/auth`;
 
 app.use(express.json());
 
@@ -29,22 +35,17 @@ app.post("/users/signup", async (req, res) => {
       .json({ message: "An email and password needs to be specified!" });
   }
 
-  const requiresPort = process.env.REQUIRE_PORT || "true";
-  const hostUrl =
-    requiresPort === "true"
-      ? `${protocol}://${host}:${port}`
-      : `${protocol}://${host}/auth`;
-
-  console.log({ hostUrl, authService: process.env.AUTH_API_SRV_SERVICE_HOST });
-
-  const authService = process.env.AUTH_API_SRV_SERVICE_HOST;
-
   try {
-    const hashedPW = await axios.get(
-      `/auth-api-srv.default/auth/hashed-password/${password}`
+    const response = await axios.get(
+      `${authHostUrl}/hashed-password/${password}`
     );
+
+    const hashedPW = response.data.hashedPassword;
+
     // since it's a dummy service, we don't really care for the hashed-pw either
     console.log(hashedPW, email);
+    console.table({ hashedPW, email });
+
     res.status(201).json({ message: "User created!" });
   } catch (err) {
     console.log(err);
@@ -73,7 +74,7 @@ app.post("/users/login", async (req, res) => {
   // normally, we'd find a user by email and grab his/ her ID and hashed password
   const hashedPassword = password + "_hash";
   const response = await axios.get(
-    "http://auth/token/" + hashedPassword + "/" + password
+    `${authHostUrl}/token/${hashedPassword}/${password}`
   );
   if (response.status === 200) {
     return res.status(200).json({ token: response.data.token });
