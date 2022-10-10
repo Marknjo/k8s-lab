@@ -3,6 +3,10 @@ import axios from "axios";
 
 const app = express();
 
+const port = process.env.PORT || 8002;
+const host = process.env.HOST || "localhost";
+const protocol = process.env.PROTOCOL || "http";
+
 app.use(express.json());
 
 app.get("/users/", (req, res) => {
@@ -25,8 +29,20 @@ app.post("/users/signup", async (req, res) => {
       .json({ message: "An email and password needs to be specified!" });
   }
 
+  const requiresPort = process.env.REQUIRE_PORT || "true";
+  const hostUrl =
+    requiresPort === "true"
+      ? `${protocol}://${host}:${port}`
+      : `${protocol}://${host}/auth`;
+
+  console.log({ hostUrl, authService: process.env.AUTH_API_SRV_SERVICE_HOST });
+
+  const authService = process.env.AUTH_API_SRV_SERVICE_HOST;
+
   try {
-    const hashedPW = await axios.get("http://auth/hashed-password/" + password);
+    const hashedPW = await axios.get(
+      `/auth-api-srv.default/auth/hashed-password/${password}`
+    );
     // since it's a dummy service, we don't really care for the hashed-pw either
     console.log(hashedPW, email);
     res.status(201).json({ message: "User created!" });
@@ -65,15 +81,8 @@ app.post("/users/login", async (req, res) => {
   return res.status(response.status).json({ message: "Logging in failed!" });
 });
 
-const port = process.env.PORT || 8002;
-const host = process.env.HOST || "localhost";
-const protocol = process.env.PROTOCOL || "http";
-
 app.listen(port, () => {
   const requiresPort = process.env.REQUIRE_PORT || "true";
-
-  console.log({ port, host });
-
   const hostUrl =
     requiresPort === "true"
       ? `${protocol}://${host}:${port}`
