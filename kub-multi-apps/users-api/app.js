@@ -88,5 +88,5 @@ app.listen(port, () => {
     requiresPort === "true"
       ? `${protocol}://${host}:${port}`
       : `${protocol}://${host}/users`;
-  console.log(`Users server running on ${hostUrl}`);
+  console.log(`Users server running on ${hostUrl} ...`);
 });

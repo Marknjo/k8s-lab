@@ -38,4 +38,12 @@ build:
         manual:
           - dest: .
             src: "*.js"
+    
+    # frontend config
+    - image: marknjo/kub-test-tasks-frontend
+      context: frontend
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        infer: ["**/*"]
   

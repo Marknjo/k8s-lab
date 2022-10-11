@@ -12,11 +12,14 @@ spec:
       name: frontend-pod
       labels:
         app: frontend
-  spec: 
-    containers:
-      - name: tasks-frontend-react-app
-        image: marknjo/kub-test-tasks-frontend
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 8003
-        
+    spec: 
+      containers:
+        - name: tasks-frontend-react-app
+          image: marknjo/kub-test-tasks-frontend
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8003
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1.5Gi"
