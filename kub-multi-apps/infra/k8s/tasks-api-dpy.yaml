@@ -19,7 +19,7 @@ spec:
           resources:
             limits:
               cpu: "500m"
-              memory: "1.5Gi"
+              memory: "128Mi"
           volumeMounts:
             - mountPath: /apps/tasks
               name: tasks-data-vol
@@ -47,3 +47,4 @@ spec:
           hostPath:
             path: /data
             type: DirectoryOrCreate
+
