@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-dpy
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      name: frontend-pod
+      labels:
+        app: frontend
+  spec: 
+    containers:
+      - name: tasks-frontend-react-app
+        image: marknjo/kub-test-tasks-frontend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8003
+        
