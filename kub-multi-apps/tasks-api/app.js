@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 
 import express from "express";
+import cors from "cors";
 import axios from "axios";
 import { fileURLToPath } from "url";
 
@@ -11,6 +12,8 @@ const __dirname = path.dirname(__filename);
 const filePath = path.join(__dirname, process.env.TASKS_FOLDER, "tasks.txt");
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
