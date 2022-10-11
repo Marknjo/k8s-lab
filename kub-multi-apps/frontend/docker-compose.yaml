@@ -1,0 +1,11 @@
+services:
+  tasks-front:
+    build: 
+      context: .
+    container_name: tasks-cnt
+    ports:
+      - 8003:8003
+    volumes:
+      - ./conf:/etc/nginx/conf.d/
+    command: nginx-debug -g 'daemon off;'
+    
