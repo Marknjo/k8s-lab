@@ -35,6 +35,10 @@ spec:
               value: "false"
             - name: TASKS_FOLDER
               value: tasks
+            - name: AUTH_ADDRESS
+              value: auth-api-srv
+            - name: AUTH_PORT
+              value: "8000"
           ports:
             - containerPort: 8001
 

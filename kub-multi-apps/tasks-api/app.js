@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import { fileURLToPath } from "url";
+import { env } from "process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,7 +28,11 @@ const extractAndVerifyToken = async (headers) => {
   }
   const token = headers.authorization.split(" ")[1]; // expects Bearer TOKEN
 
-  const response = await axios.get("http://auth/verify-token/" + token);
+  const authAddr = env.AUTH_ADDRESS || "auth-srv";
+  const authPort = env.AUTH_PORT || 8000;
+  const authHostUrl = `http://${authAddr}:${authPort}/auth`;
+
+  const response = await axios.get(`${authHostUrl}/verify-token/${token}`);
   return response.data.uid;
 };
 
@@ -61,6 +66,7 @@ app.post("/tasks/create/task", async (req, res) => {
     const title = req.body.title;
     const task = { title, text };
     const jsonTask = JSON.stringify(task);
+
     fs.appendFile(filePath, jsonTask + "TASK_SPLIT", (err) => {
       if (err) {
         console.log(err);
