@@ -42,6 +42,7 @@ spec:
           ports:
             - containerPort: 8001
 
+      # App works
       volumes:
         - name: tasks-data-vol
           persistentVolumeClaim:
