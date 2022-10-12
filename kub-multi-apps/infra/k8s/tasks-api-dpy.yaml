@@ -21,7 +21,7 @@ spec:
               cpu: "500m"
               memory: "128Mi"
           volumeMounts:
-            - mountPath: /apps/tasks
+            - mountPath: /app/tasks
               name: tasks-data-vol
           imagePullPolicy: Never
           env:
@@ -46,7 +46,7 @@ spec:
         - name: tasks-data-vol
           persistentVolumeClaim:
             claimName: tasks-pvc
-          # Not working as expected
+          # Not working as expected - Issue was mountPath: /apps instead of apps
           # hostPath:
           #   path: /data
           #   type: DirectoryOrCreate
