@@ -41,6 +41,17 @@ app.get("/tasks", async (req, res) => {
     const uid = await extractAndVerifyToken(req.headers); // we don't really need the uid
     fs.readFile(filePath, (err, data) => {
       if (err) {
+        if (err.code === "ENOENT") {
+          console.log("🌋🌋🌋, no tasks in the database");
+
+          res.status(200).json({
+            message: "",
+            tasks: [],
+          });
+
+          return;
+        }
+
         console.log(err);
         return res.status(500).json({ message: "Loading the tasks failed." });
       }
