@@ -44,7 +44,10 @@ spec:
 
       volumes:
         - name: tasks-data-vol
-          hostPath:
-            path: /data
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: tasks-pvc
+          # Not working as expected
+          # hostPath:
+          #   path: /data
+          #   type: DirectoryOrCreate
 
