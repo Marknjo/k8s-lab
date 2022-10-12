@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tasks-pvc
+spec: 
+  volumeName: tasks-host-pv
+  resources:
+    requests:
+      storage: "250m"
+  storageClassName: hostpath
+  accessModes:
+    - "ReadWriteOnly"
