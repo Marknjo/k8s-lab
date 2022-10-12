@@ -3,11 +3,12 @@ kind: PersistentVolume
 metadata:
   name: tasks-host-pv
 spec: 
+  storageClassName: hostpath
   capacity:
     storage: "250m"
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnly
+    - "ReadWriteOnce"
   hostPath: 
     path: /data
     type: DirectoryOrCreate

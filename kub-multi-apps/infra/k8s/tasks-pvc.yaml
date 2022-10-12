@@ -4,9 +4,9 @@ metadata:
   name: tasks-pvc
 spec: 
   volumeName: tasks-host-pv
+  storageClassName: hostpath
+  accessModes:
+    - "ReadWriteOnce"
   resources:
     requests:
       storage: "250m"
-  storageClassName: hostpath
-  accessModes:
-    - "ReadWriteOnly"
